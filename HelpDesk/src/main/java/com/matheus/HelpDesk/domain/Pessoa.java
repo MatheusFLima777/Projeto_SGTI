@@ -1,22 +1,39 @@
 package com.matheus.HelpDesk.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.matheus.HelpDesk.domain.enums.Perfil;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public abstract class Pessoa {
+@Entity
 
+public abstract class Pessoa implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) /*Anotação para mostrar que
+                                                         a responsabilidade da geração do ID fica por conta do BD */
      protected Integer id;
      protected String nome;
+
+     @Column(unique = true)
      protected String cpf;
+    @Column(unique = true)
      protected String email;
      protected String senha;
+     @ElementCollection(fetch = FetchType.EAGER)
+     /* Para ter certeza que o usuário tenha a lista de perfil, junto ao usuário, para quando dar o Get vir com o perfil correto ao usuário*/
+    @CollectionTable(name = "TB_PERFIS")
      protected Set<Integer> perfis = new HashSet<>(); /* Desta forma previne o Null pointer exceptio*/
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
      protected LocalDate dataCriacao = LocalDate.now();
 
      public Pessoa() {

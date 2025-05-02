@@ -1,22 +1,44 @@
 package com.matheus.HelpDesk.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.matheus.HelpDesk.domain.enums.Prioridade;
 import com.matheus.HelpDesk.domain.enums.Status;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Chamado {
+@Entity
+
+public class Chamado implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDate dataAbertura = LocalDate.now();
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDate dataFechamento;
     private Prioridade prioridade;
     private Status status;
     private String titulo;
     private String observacoes;
 
+    @ManyToOne
+    @JoinColumn(name = "Funcionario_id")
     private Funcionario funcionario;
+
+    @ManyToOne
+    @JoinColumn( name = "Agente_id")
     private Agente agente;
+
+    @ManyToOne
+    @JoinColumn (name = "Admin_ID")
+    private Admin admin;
 
     public Chamado(Integer id, Prioridade prioridade,
                    Status status, String titulo,
@@ -30,6 +52,10 @@ public class Chamado {
         this.observacoes = observacoes;
         this.funcionario = funcionario;
         this.agente = agente;
+    }
+
+    public Chamado() {
+        super();
     }
 
     public Integer getId() {
