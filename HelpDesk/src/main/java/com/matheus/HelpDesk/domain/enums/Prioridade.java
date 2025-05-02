@@ -1,4 +1,4 @@
-package main.enums;
+package com.matheus.HelpDesk.domain.enums;
 
 public enum Prioridade {
     BAIXA(0, "BAIXA"),

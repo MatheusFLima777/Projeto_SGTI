@@ -1,7 +1,10 @@
-package main.enums;
+package com.matheus.HelpDesk.domain.enums;
 
 public enum Perfil {
-    ADMIN(0, "ROLE_ADMIN"), FUNCIONARIO(1, "ROLE_FUNCIONARIO"), AGENTE(2, "ROLE_AGENTE");
+    ADMIN(0, "ROLE_ADMIN"),
+    PESSOA(1, "PESSOA"),
+    AGENTE(2, "ROLE_AGENTE"),
+    FUNCIONARIO(3, "ROLE_FUNCIONARIO");
 
 
     private Integer codigo;

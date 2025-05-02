@@ -1,4 +1,4 @@
-package main.enums;
+package com.matheus.HelpDesk.domain.enums;
 
 public enum Status {
     ABERTO(0, "ABERTO"),
