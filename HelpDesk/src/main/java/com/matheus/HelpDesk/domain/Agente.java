@@ -1,11 +1,13 @@
 package com.matheus.HelpDesk.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.matheus.HelpDesk.domain.enums.Perfil;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +23,11 @@ public class Agente extends Pessoa {
         super();
         addPerfil(Perfil.AGENTE);
     }
+
     public Agente(Integer id, String nome, String cpf, String email, String senha){
         super(id, nome, cpf, email, senha);
     }
+
 
     public Agente(List<Chamado> chamados) {
         this.chamados = chamados;
