@@ -1,5 +1,6 @@
 package com.matheus.HelpDesk.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.matheus.HelpDesk.domain.enums.Perfil;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -24,7 +25,7 @@ public class Admin extends Pessoa{
         super();
         addPerfil(Perfil.ADMIN);
     }
-
+    @JsonIgnore
     public List<Chamado> getChamados() {
         return chamados;
     }

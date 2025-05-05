@@ -1,0 +1,22 @@
+package com.matheus.HelpDesk.Services;
+
+import com.matheus.HelpDesk.Repository.AgenteRepository;
+import com.matheus.HelpDesk.domain.Agente;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+public class AgenteService {
+
+    private final AgenteRepository agenteRepository;
+
+    public AgenteService(AgenteRepository Repository) {
+        this.agenteRepository = Repository;
+    }
+
+    public Agente findById(Integer id) {
+        Optional<Agente> obj = agenteRepository.findById(id);
+        return obj.orElseThrow(() -> new RuntimeException("Agente não encontrado com ID: "+ id));
+    }
+}

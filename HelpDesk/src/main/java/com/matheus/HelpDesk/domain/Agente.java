@@ -1,11 +1,14 @@
 package com.matheus.HelpDesk.domain;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.matheus.HelpDesk.domain.enums.Perfil;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Entity
 public class Agente extends Pessoa {
@@ -26,6 +29,7 @@ public class Agente extends Pessoa {
         this.chamados = chamados;
     }
 
+    @JsonIgnore
     public List<Chamado> getChamados() {
         return chamados;
     }

@@ -1,5 +1,6 @@
 package com.matheus.HelpDesk.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.matheus.HelpDesk.domain.enums.Perfil;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -25,6 +26,7 @@ public class Funcionario extends Pessoa {
         super(id, nome, cpf, email, senha);
     }
 
+    @JsonIgnore
     public List<Chamado> getChamados() {
         return chamados;
     }
