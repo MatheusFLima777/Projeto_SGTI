@@ -28,7 +28,9 @@ public class AgenteDTO implements Serializable {
 
 
     public AgenteDTO() {
+
         super();
+        addPerfiL(Perfil.AGENTE);
     }
     public AgenteDTO(Agente obj) {
         this.id = obj.getId();
@@ -38,6 +40,7 @@ public class AgenteDTO implements Serializable {
         this.senha = obj.getSenha();
         this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.dataCriacao = obj.getDataCriacao();
+        addPerfiL(Perfil.AGENTE);
     }
 
     public Integer getId() {
