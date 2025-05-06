@@ -18,12 +18,26 @@ public class ResourceExceptionHandler {
                                                      HttpServletRequest request) {
 
         StandardError error = new StandardError(LocalDateTime.now(),
-                                                HttpStatus.NOT_FOUND.value(),
-                                                "Object Not Found",
-                                                 ex.getMessage(),
-                                                 request.getRequestURI());
+                HttpStatus.NOT_FOUND.value(),
+                "Object Not Found",
+                ex.getMessage(),
+                request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<StandardError> dataIntegrityViolationException(Exception ex,
+                                                                         HttpServletRequest request) {
+
+        StandardError error = new StandardError(LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                "Violação de dados",
+                ex.getMessage(),
+                request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+
     }
 }
 

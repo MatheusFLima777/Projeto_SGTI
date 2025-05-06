@@ -1,6 +1,7 @@
 package com.matheus.HelpDesk.Services;
 
 import com.matheus.HelpDesk.Repository.AdminRepository;
+import com.matheus.HelpDesk.Repository.PessoaRepository;
 import com.matheus.HelpDesk.Resources.execption.ObjNotFoundException;
 import com.matheus.HelpDesk.domain.Admin;
 import com.matheus.HelpDesk.domain.DTOS.AdminDTO;
@@ -13,9 +14,15 @@ import java.util.Optional;
 public class AdminService {
 
     private final AdminRepository adminRepository;
+    private PessoaRepository pessoaRepository;
 
-    public AdminService(AdminRepository Repository) {
-        this.adminRepository = Repository;
+
+
+    public AdminService(AdminRepository adminRepository, PessoaRepository pessoaRepository) {
+
+        this.adminRepository = adminRepository;
+        this.pessoaRepository = pessoaRepository;
+
     }
 
     public Admin findById(Integer id) {
@@ -32,4 +39,7 @@ public class AdminService {
         return adminRepository.save(newObj);
     }
 
-}
+
+    }
+
+
