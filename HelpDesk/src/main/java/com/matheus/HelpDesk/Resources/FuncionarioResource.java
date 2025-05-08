@@ -5,6 +5,7 @@ package com.matheus.HelpDesk.Resources;
 import com.matheus.HelpDesk.Services.FuncionarioService;
 import com.matheus.HelpDesk.domain.DTOS.FuncionarioDTO;
 import com.matheus.HelpDesk.domain.Funcionario;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -25,14 +26,14 @@ public class FuncionarioResource {
         this.funcionarioService = funcionarioService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Funcionario> findById(@PathVariable Integer id) {
-        Funcionario funcionario = service.findById(id);
-        return ResponseEntity.ok().body(funcionario);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<FuncionarioDTO> findById(@PathVariable Integer id) {
+        Funcionario obj = this.funcionarioService.findById(id);
+        return ResponseEntity.ok().body(new FuncionarioDTO(obj));
     }
 
     @GetMapping
-    public  ResponseEntity<List<FuncionarioDTO>> findAll(){
+    public ResponseEntity<List<FuncionarioDTO>> findAll() {
         List<Funcionario> list = funcionarioService.findAll();
         List<FuncionarioDTO> listDTO = list.stream().map(obj -> new FuncionarioDTO(obj)).collect(Collectors.toList());
 
@@ -40,7 +41,7 @@ public class FuncionarioResource {
     }
 
     @PostMapping
-    public ResponseEntity<FuncionarioDTO> create(@RequestBody FuncionarioDTO objDTO) {
+    public ResponseEntity<FuncionarioDTO> create(@Valid @RequestBody FuncionarioDTO objDTO) {
         Funcionario newObj = funcionarioService.create(objDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
@@ -48,4 +49,18 @@ public class FuncionarioResource {
 
         return ResponseEntity.created(uri).build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<FuncionarioDTO> update(@PathVariable Integer id, @Valid  @RequestBody FuncionarioDTO objDTO) {
+        Funcionario obj = funcionarioService.update(id, objDTO);
+        return ResponseEntity.ok().body(new FuncionarioDTO(obj));
+    }
+
+
+    @DeleteMapping (value = "/{id}")
+    public ResponseEntity<FuncionarioDTO> delete(@PathVariable Integer id) {
+        funcionarioService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
+
