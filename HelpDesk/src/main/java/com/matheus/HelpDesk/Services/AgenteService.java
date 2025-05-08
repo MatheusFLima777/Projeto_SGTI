@@ -7,6 +7,7 @@ import com.matheus.HelpDesk.Resources.execption.ObjNotFoundException;
 import com.matheus.HelpDesk.domain.Agente;
 import com.matheus.HelpDesk.domain.DTOS.AgenteDTO;
 import com.matheus.HelpDesk.domain.Pessoa;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,5 +52,14 @@ public class AgenteService {
         if(obj.isPresent() && obj.get().getId() != objDTO.getId()) {
             throw new DataIntegrityViolationException("E-mail já cadastrado no sistema");
         }
+
     }
+    public Agente update(Integer id, AgenteDTO objDTO) {
+        objDTO.setId(id);
+        Agente oldObj = findById(id);
+        validaCPFeEmail(objDTO);
+        oldObj = new Agente(objDTO);
+        return pessoaRepository.save(oldObj);
+    }
+
 }

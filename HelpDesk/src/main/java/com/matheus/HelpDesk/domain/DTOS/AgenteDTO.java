@@ -3,6 +3,7 @@ package com.matheus.HelpDesk.domain.DTOS;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.matheus.HelpDesk.domain.Agente;
 import com.matheus.HelpDesk.domain.enums.Perfil;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -15,11 +16,16 @@ public class AgenteDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     protected Integer id;
+    @NotNull(message = "O campo NOME é Obrigatório")
     protected String nome;
 
+    @NotNull(message = "O campo CPF é Obrigatório")
     protected String cpf;
+    @NotNull(message = "O campo E-MAIL é Obrigatório")
     protected String email;
+    @NotNull(message = "O campo SENHA é Obrigatório")
     protected String senha;
+
     protected Set<Integer> perfis = new HashSet<>();
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")

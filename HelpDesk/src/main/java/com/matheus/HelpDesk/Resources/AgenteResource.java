@@ -3,6 +3,7 @@ package com.matheus.HelpDesk.Resources;
 import com.matheus.HelpDesk.Services.AgenteService;
 import com.matheus.HelpDesk.domain.Agente;
 import com.matheus.HelpDesk.domain.DTOS.AgenteDTO;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -37,7 +38,7 @@ public class AgenteResource {
     }
 
     @PostMapping
-    public ResponseEntity<AgenteDTO> create(@RequestBody AgenteDTO objDTO) {
+    public ResponseEntity<AgenteDTO> create(@Valid  @RequestBody AgenteDTO objDTO) {
         Agente newObj = agenteService.create(objDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
@@ -46,4 +47,10 @@ public class AgenteResource {
         return ResponseEntity.created(uri).build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<AgenteDTO> update(@PathVariable Integer id, @Valid  @RequestBody AgenteDTO objDTO) {
+    Agente obj = agenteService.update(id, objDTO);
+    return ResponseEntity.ok().body(new AgenteDTO(obj));
+    }
 }
+
