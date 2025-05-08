@@ -52,5 +52,12 @@ public class AgenteResource {
     Agente obj = agenteService.update(id, objDTO);
     return ResponseEntity.ok().body(new AgenteDTO(obj));
     }
+
+
+    @DeleteMapping (value = "/{id}")
+    public ResponseEntity<AgenteDTO> delete(@PathVariable Integer id) {
+         agenteService.delete(id);
+         return ResponseEntity.noContent().build();
+    }
 }
 
