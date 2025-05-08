@@ -2,7 +2,6 @@ package com.matheus.HelpDesk.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.matheus.HelpDesk.domain.DTOS.AdminDTO;
-import com.matheus.HelpDesk.domain.DTOS.AgenteDTO;
 import com.matheus.HelpDesk.domain.enums.Perfil;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -27,6 +26,7 @@ public class Admin extends Pessoa{
     public Admin() {
         super();
         addPerfil(Perfil.ADMIN);
+        addPerfil(Perfil.AGENTE);
     }
     public Admin(AdminDTO obj) {
         super();

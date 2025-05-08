@@ -10,8 +10,7 @@ public enum Prioridade {
     private Integer codigo;
     private String descricao;
 
-    Prioridade(Integer codigo, String descricao) {
-
+    private Prioridade(Integer codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
@@ -24,15 +23,17 @@ public enum Prioridade {
         return descricao;
     }
 
-    public static Perfil toEnum(Integer cod) {
-        if (cod == null) {
+    public static Prioridade toEnum(Integer cod) {
+        if(cod == null) {
             return null;
         }
-        for (Perfil x : Perfil.values()) {
-            if (cod.equals(x.getCodigo())) {
+
+        for(Prioridade x : Prioridade.values()) {
+            if(cod.equals(x.getCodigo())) {
                 return x;
             }
         }
+
         throw new IllegalArgumentException("Prioridade inválida");
     }
 }

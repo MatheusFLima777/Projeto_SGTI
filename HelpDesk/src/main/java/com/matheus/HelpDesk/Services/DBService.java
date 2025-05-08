@@ -66,7 +66,7 @@ public class DBService {
                 null);
         admin1.addPerfil(Perfil.ADMIN);
 
-        Chamado chamado1 = new Chamado(null, Prioridade.MEDIA, Status.Novo,
+        Chamado chamado1 = new Chamado(null, Prioridade.MEDIA, Status.NOVO,
                 "TESTE 01", "PRIMEIRO CHAMADO", funcionario1, agente1);
 
         agenteRepository.saveAll(Arrays.asList(agente1, agente2));

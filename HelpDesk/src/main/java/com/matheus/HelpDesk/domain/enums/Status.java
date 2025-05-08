@@ -1,18 +1,23 @@
 package com.matheus.HelpDesk.domain.enums;
 
 public enum Status {
-    Novo(0,"NOVO"),
+    NOVO(0,"NOVO"),
     ABERTO(1, "ABERTO"),
     PENDENTE(2, "PENDENTE"),
     EM_ESPERA(3,"EM ESPESRA"),
     LIBERAR_ACESSO(4, "LIBERAR ACESSO"),
     COM_ESPECIALISTA(5, "COM ESPECIALISTA"),
     RESOLVIDO(6, "RESOLVIDO"),
-    FECHADO(7, "FECHADO");
+    FECHADO(7, "FECHADO"),
+    CANCELADO(8,"CANCELADO");
 
 
-    private Integer codigo;
-    private String descricao;
+
+
+
+
+    private final Integer codigo;
+    private final String descricao;
 
     Status(Integer codigo, String descricao) {
 

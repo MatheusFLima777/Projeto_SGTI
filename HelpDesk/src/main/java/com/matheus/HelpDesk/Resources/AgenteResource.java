@@ -22,7 +22,7 @@ public class AgenteResource {
         this.agenteService = agenteService;
     }
 
-    // localhost:8080/agente/1
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<AgenteDTO> findById(@PathVariable Integer id) {
         Agente obj = this.agenteService.findById(id);
